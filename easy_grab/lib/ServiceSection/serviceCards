@@ -1,0 +1,116 @@
+import 'package:flutter/material.dart';
+
+class ServicesSection extends StatelessWidget {
+  final List<ServiceItem> services = [
+    ServiceItem("Domestic Service", "Reliable local delivery solutions for your business needs with nationwide coverage.", "assets/image/s1.png"),
+    ServiceItem("International Services", "Global shipping solutions connecting businesses worldwide with efficiency.", "assets/image/s2.png"),
+    ServiceItem("Cash on Delivery", "Secure payment collection service upon successful delivery of your items.", "assets/image/s3.png"),
+    ServiceItem("Ecommerce Courier", "Integrated shipping solutions designed for online businesses.", "assets/image/s4.png"),
+    ServiceItem("Last Mile Delivery", "Fast and efficient final delivery service to your customers' doorstep.", "assets/image/s5.png"),
+    ServiceItem("Road Transport", "Comprehensive ground transportation solutions for all cargo types.", "assets/image/s6.png"),
+    ServiceItem("Transshipment Service", "Efficient cargo transfer services between all.", "assets/image/s7.png"),
+    ServiceItem("Project Logistics", "Specialized solutions for large-scale industrial transportation.", "assets/image/s8.png"),
+  ];
+
+
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    // Adjust grid layout based on screen width
+    int crossAxisCount = screenWidth > 1200
+        ? 4
+        : screenWidth > 900
+            ? 3
+            : screenWidth > 600
+                ? 2
+                : 1;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // Title & Subtitle
+          Text(
+            "Our Services",
+            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 8),
+          Text(
+            "Find a Smart Solution That Fits Your Requirement",
+            style: TextStyle(fontSize: 18, color: Colors.grey[600]),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 24),
+         
+
+          // Grid of Service Cards
+          LayoutBuilder(
+            builder: (context, constraints) {
+              return GridView.count(
+                shrinkWrap: true,
+                crossAxisCount: crossAxisCount,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                physics: NeverScrollableScrollPhysics(),
+                children: services.map((service) => _buildServiceCard(service)).toList(),
+              );
+            },
+          ),
+
+          SizedBox(height: 24),
+
+          // Explore Services Button
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              backgroundColor: Colors.black,
+            ),
+            child: Text("Explore Services", style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildServiceCard(ServiceItem service) {
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Center(
+                child: Image.asset(service.imagePath, fit: BoxFit.cover),
+              ),
+            ),
+            SizedBox(height: 12),
+            Text(service.title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            SizedBox(height: 6),
+            Text(service.description, style: TextStyle(fontSize: 14, color: Colors.grey[600])),
+            SizedBox(height: 8),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Icon(Icons.arrow_forward, color: Colors.black),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// Service Item Model
+class ServiceItem {
+  final String title;
+  final String description;
+  final String imagePath;
+  ServiceItem(this.title, this.description, this.imagePath);
+}

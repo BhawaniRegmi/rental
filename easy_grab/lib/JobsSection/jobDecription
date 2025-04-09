@@ -1,0 +1,467 @@
+// import 'package:flutter/material.dart';
+
+// class JobDetailsPage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     double screenWidth = MediaQuery.of(context).size.width;
+//     bool isMobile = screenWidth < 800;
+
+//     return Scaffold(
+//       appBar: AppBar(
+//         backgroundColor: Colors.white,
+//         elevation: 1,
+//         actions: [
+//           DropdownButton<String>(
+//             value: "English",
+//             onChanged: (value) {},
+//             items: ["English", "Arabic"].map((String lang) {
+//               return DropdownMenuItem<String>(
+//                 value: lang,
+//                 child: Text(lang),
+//               );
+//             }).toList(),
+//           ),
+//           SizedBox(width: 10),
+//           ElevatedButton(onPressed: () {}, child: Text("Login")),
+//           SizedBox(width: 10),
+//         ],
+//       ),
+//       body: SingleChildScrollView(
+//         padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 40, vertical: 20),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             // Job Header Section
+//             Card(
+//               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+//               child: Padding(
+//                 padding: EdgeInsets.all(20),
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     Row(
+//                       children: [
+//                         Image.asset("assets/logo.png", width: 40, height: 40), // Use your logo asset
+//                         SizedBox(width: 10),
+//                         Expanded(
+//                           child: Text("Delivery Driver",
+//                               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+//                         ),
+//                         ElevatedButton(
+//                           style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+//                           onPressed: () {},
+//                           child: Text("Apply Now", style: TextStyle(color: Colors.white)),
+//                         ),
+//                       ],
+//                     ),
+//                     SizedBox(height: 10),
+//                     Row(children: [
+//                       Icon(Icons.location_on, size: 18, color: Colors.grey),
+//                       SizedBox(width: 5),
+//                       Text("Dubai, UAE"),
+//                       SizedBox(width: 20),
+//                       Icon(Icons.access_time, size: 18, color: Colors.grey),
+//                       SizedBox(width: 5),
+//                       Text("Full-time"),
+//                       SizedBox(width: 20),
+//                       Icon(Icons.calendar_today, size: 18, color: Colors.grey),
+//                       SizedBox(width: 5),
+//                       Text("Posted 2 days ago"),
+//                     ]),
+//                     SizedBox(height: 20),
+//                     // Job Details Info Cards
+//                     Wrap(
+//                       spacing: 16,
+//                       runSpacing: 16,
+//                       children: [
+//                         _buildDetailCard("Salary Range", "AED 3,000 - 4,500", "Monthly + Benefits"),
+//                         _buildDetailCard("Experience", "1-3 Years", "Delivery Experience"),
+//                         _buildDetailCard("Department", "Operations", "Logistics Division"),
+//                         _buildDetailCard("Application Deadline", "15", "Days Remaining"),
+//                       ],
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//             SizedBox(height: 20),
+
+//             // Job Description
+//             _buildSectionTitle("Job Description"),
+//             Text(
+//               "We are seeking professional delivery drivers to join our growing team in Dubai. As a delivery driver, you will be responsible for ensuring timely and accurate delivery of packages to our customers while maintaining high standards of customer service.",
+//               style: TextStyle(fontSize: 16, color: Colors.black87),
+//             ),
+//             SizedBox(height: 10),
+
+//             // Key Responsibilities
+//             _buildSectionTitle("Key Responsibilities"),
+//             _buildBulletPoints([
+//               "Deliver packages to residential and commercial locations",
+//               "Plan and optimize delivery routes for maximum efficiency",
+//               "Maintain delivery vehicle in clean and proper working condition",
+//               "Handle cash transactions and maintain accurate records",
+//               "Provide excellent customer service and resolve delivery issues",
+//             ]),
+//             SizedBox(height: 10),
+
+//             // Requirements
+//             _buildSectionTitle("Requirements"),
+//             _buildBulletPoints([
+//               "Valid UAE driving license",
+//               "Minimum 1-3 years of delivery experience in UAE",
+//               "Excellent knowledge of Dubai roads and areas",
+//               "Strong communication skills in English",
+//               "Clean driving record",
+//               "Ability to work in shifts",
+//             ]),
+//             SizedBox(height: 10),
+
+//             // Benefits
+//             _buildSectionTitle("Benefits"),
+//             _buildBulletPoints([
+//               "Competitive monthly salary",
+//               "Performance bonuses",
+//               "Health insurance",
+//               "Accommodation allowance",
+//               "Annual flight tickets",
+//               "Visa sponsorship",
+//             ]),
+//             SizedBox(height: 10),
+
+//             // How to Apply
+//             _buildSectionTitle("How to Apply"),
+//             Container(
+//               padding: EdgeInsets.all(16),
+//               decoration: BoxDecoration(
+//                 color: Colors.grey[100],
+//                 borderRadius: BorderRadius.circular(8),
+//               ),
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   Text("Please submit the following documents:",
+//                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+//                   SizedBox(height: 8),
+//                   _buildListItem("Updated CV/Resume"),
+//                   _buildListItem("Copy of UAE driving license"),
+//                   _buildListItem("Passport copy with valid visa"),
+//                 ],
+//               ),
+//             ),
+
+//             SizedBox(height: 20),
+//             Text("Application deadline: July 30, 2024",
+//                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+//             SizedBox(height: 20),
+
+//             // Footer Buttons
+//             Row(
+//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//               children: [
+//                 OutlinedButton.icon(
+//                   onPressed: () {},
+//                   icon: Icon(Icons.bookmark_border),
+//                   label: Text("Save Job"),
+//                 ),
+//                 OutlinedButton.icon(
+//                   onPressed: () {},
+//                   icon: Icon(Icons.share),
+//                   label: Text("Share"),
+//                 ),
+//                 ElevatedButton(
+//                   style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+//                   onPressed: () {},
+//                   child: Text("Apply Now", style: TextStyle(color: Colors.white)),
+//                 ),
+//               ],
+//             ),
+//             SizedBox(height: 40),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+
+//   Widget _buildDetailCard(String title, String value, String subtitle) {
+//     return Container(
+//       width: 260,
+//       padding: EdgeInsets.all(12),
+//       decoration: BoxDecoration(
+//         borderRadius: BorderRadius.circular(8),
+//         border: Border.all(color: Colors.grey.shade300),
+//       ),
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           Text(title, style: TextStyle(fontSize: 14, color: Colors.grey[600])),
+//           SizedBox(height: 4),
+//           Text(value, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+//           Text(subtitle, style: TextStyle(fontSize: 14, color: Colors.grey[700])),
+//         ],
+//       ),
+//     );
+//   }
+
+//   Widget _buildSectionTitle(String title) {
+//     return Padding(
+//       padding: const EdgeInsets.only(top: 20, bottom: 10),
+//       child: Text(title, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+//     );
+//   }
+
+//   Widget _buildBulletPoints(List<String> points) {
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: points
+//           .map((point) => Padding(
+//                 padding: const EdgeInsets.only(bottom: 6),
+//                 child: Row(
+//                   children: [
+//                     Icon(Icons.circle, size: 8, color: Colors.black),
+//                     SizedBox(width: 6),
+//                     Expanded(child: Text(point, style: TextStyle(fontSize: 16))),
+//                   ],
+//                 ),
+//               ))
+//           .toList(),
+//     );
+//   }
+
+//   Widget _buildListItem(String text) {
+//     return Row(
+//       children: [
+//         Icon(Icons.check_circle, color: Colors.black),
+//         SizedBox(width: 8),
+//         Text(text, style: TextStyle(fontSize: 16)),
+//       ],
+//     );
+//   }
+// }
+
+
+
+
+
+
+
+
+import 'package:flutter/material.dart';
+
+class JobDetailsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isMobile = screenWidth < 800;
+
+    return SingleChildScrollView(
+      padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 40, vertical: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Job Header Section
+          Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Image.asset("assets/image/red.png", width: 40, height: 40), // Use your logo asset
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: Text("Delivery Driver",
+                            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                        onPressed: () {},
+                        child: Text("Apply Now", style: TextStyle(color: Colors.white)),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  Row(children: [
+                    Icon(Icons.location_on, size: 18, color: Colors.grey),
+                    SizedBox(width: 5),
+                    Text("Dubai, UAE"),
+                    SizedBox(width: 20),
+                    Icon(Icons.access_time, size: 18, color: Colors.grey),
+                    SizedBox(width: 5),
+                    Text("Full-time"),
+                    SizedBox(width: 20),
+                    Icon(Icons.calendar_today, size: 18, color: Colors.grey),
+                    SizedBox(width: 5),
+                    Text("Posted 2 days ago"),
+                  ]),
+                  SizedBox(height: 20),
+                  // Job Details Info Cards
+                  Wrap(
+                    spacing: 16,
+                    runSpacing: 16,
+                    children: [
+                      _buildDetailCard("Salary Range", "AED 3,000 - 4,500", "Monthly + Benefits"),
+                      _buildDetailCard("Experience", "1-3 Years", "Delivery Experience"),
+                      _buildDetailCard("Department", "Operations", "Logistics Division"),
+                      _buildDetailCard("Application Deadline", "15", "Days Remaining"),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+
+          // Job Description
+          _buildSectionTitle("Job Description"),
+          Text(
+            "We are seeking professional delivery drivers to join our growing team in Dubai. As a delivery driver, you will be responsible for ensuring timely and accurate delivery of packages to our customers while maintaining high standards of customer service.",
+            style: TextStyle(fontSize: 16, color: Colors.black87),
+          ),
+          SizedBox(height: 10),
+
+          // Key Responsibilities
+          _buildSectionTitle("Key Responsibilities"),
+          _buildBulletPoints([
+            "Deliver packages to residential and commercial locations",
+            "Plan and optimize delivery routes for maximum efficiency",
+            "Maintain delivery vehicle in clean and proper working condition",
+            "Handle cash transactions and maintain accurate records",
+            "Provide excellent customer service and resolve delivery issues",
+          ]),
+          SizedBox(height: 10),
+
+          // Requirements
+          _buildSectionTitle("Requirements"),
+          _buildBulletPoints([
+            "Valid UAE driving license",
+            "Minimum 1-3 years of delivery experience in UAE",
+            "Excellent knowledge of Dubai roads and areas",
+            "Strong communication skills in English",
+            "Clean driving record",
+            "Ability to work in shifts",
+          ]),
+          SizedBox(height: 10),
+
+          // Benefits
+          _buildSectionTitle("Benefits"),
+          _buildBulletPoints([
+            "Competitive monthly salary",
+            "Performance bonuses",
+            "Health insurance",
+            "Accommodation allowance",
+            "Annual flight tickets",
+            "Visa sponsorship",
+          ]),
+          SizedBox(height: 10),
+
+          // How to Apply
+          _buildSectionTitle("How to Apply"),
+          Container(
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.grey[100],
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Please submit the following documents:",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                SizedBox(height: 8),
+                _buildListItem("Updated CV/Resume"),
+                _buildListItem("Copy of UAE driving license"),
+                _buildListItem("Passport copy with valid visa"),
+              ],
+            ),
+          ),
+
+          SizedBox(height: 20),
+          Text("Application deadline: July 30, 2024",
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+          SizedBox(height: 20),
+
+          // Footer Buttons
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              OutlinedButton.icon(
+                onPressed: () {},
+                icon: Icon(Icons.bookmark_border),
+                label: Text("Save Job"),
+              ),
+              OutlinedButton.icon(
+                onPressed: () {},
+                icon: Icon(Icons.share),
+                label: Text("Share"),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                onPressed: () {},
+                child: Text("Apply Now", style: TextStyle(color: Colors.white)),
+              ),
+            ],
+          ),
+          SizedBox(height: 40),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDetailCard(String title, String value, String subtitle) {
+    return Container(
+      width: 260,
+      padding: EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.grey.shade300),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title, style: TextStyle(fontSize: 14, color: Colors.grey[600])),
+          SizedBox(height: 4),
+          Text(value, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          Text(subtitle, style: TextStyle(fontSize: 14, color: Colors.grey[700])),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20, bottom: 10),
+      child: Text(title, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+    );
+  }
+
+  Widget _buildBulletPoints(List<String> points) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: points
+          .map((point) => Padding(
+                padding: const EdgeInsets.only(bottom: 6),
+                child: Row(
+                  children: [
+                    Icon(Icons.circle, size: 8, color: Colors.black),
+                    SizedBox(width: 6),
+                    Expanded(child: Text(point, style: TextStyle(fontSize: 16))),
+                  ],
+                ),
+              ))
+          .toList(),
+    );
+  }
+
+  Widget _buildListItem(String text) {
+    return Row(
+      children: [
+        Icon(Icons.check_circle, color: Colors.black),
+        SizedBox(width: 8),
+        Text(text, style: TextStyle(fontSize: 16)),
+      ],
+    );
+  }
+}
